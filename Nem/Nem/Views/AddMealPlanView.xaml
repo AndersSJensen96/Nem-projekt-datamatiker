@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="Nem.Views.AddMealPlanView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nem.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Width" Value="200" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Background="AliceBlue">
+            <StackPanel>
+                <Label
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Left"
+                    Content="Madplan Title:" />
+                <TextBox Margin="0,0,0,0" Text="{Binding Title}" />
+            </StackPanel>
+            <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                <Label Width="40" Content="Uge:" />
+                <ComboBox
+                    Width="50"
+                    ItemsSource="{Binding AllowedWeeks}"
+                    SelectedItem="{Binding SelectedWeek}" />
+
+                <Label Width="40" Content="År:" />
+                <ComboBox
+                    Width="50"
+                    ItemsSource="{Binding AllowedYears}"
+                    SelectedItem="{Binding SelectedYear}" />
+            </StackPanel>
+
+            <!--
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="100">
+                    <Label Content="Ugedag:" />
+                    <ComboBox SelectedValue="{Binding SelectedWeekday}" SelectedValuePath="Content">
+                        <ComboBoxItem Content="Mandag" />
+                        <ComboBoxItem Content="Tirsdag" />
+                        <ComboBoxItem Content="Onsdag" />
+                        <ComboBoxItem Content="Torsdag" />
+                        <ComboBoxItem Content="Fredag" />
+                        <ComboBoxItem Content="Lørdag" />
+                        <ComboBoxItem Content="Søndag" />
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="100">
+                    <Label Content="Tidsrum:" />
+                    <ComboBox ItemsSource="{Binding TimePeriods}" SelectedItem="{Binding SelectedTimePeriod}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="100">
+                    <Label Content="Antal Personer pr. opskrift" />
+                    <TextBox Text="{Binding TotalPeople}" Width="100" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="198">
+                    <Label Content="Tilføjede opskrifter" />
+                    <ListBox MinHeight="200" Height="200" ItemsSource="{Binding MealPlanRecipes}"
+                     SelectedItem="{Binding SelectedMealPlanRecipe}"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding SelectedRecipe.Name}" />
+                                    <Label Content="{Binding Day}" />
+                                    <Label Content="{Binding Period.Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button
+					Width="100"
+                    Height="30"
+					Command="{Binding RemoveRecipeFromNewMealPlan}"
+					CommandParameter="{Binding}">
+                        <StackPanel Orientation="Horizontal" Width="100">
+                            <TextBlock Text="Fjern opskrift" />
+                            <Image Height="20" Source="\Resources\Images\trash-can_38501.png" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="198">
+                    <Label Content="Eksisterende opskrifter" />
+                    <ListBox MinHeight="200" Height="200" ItemsSource="{Binding Recipes}"
+                     SelectedItem="{Binding SelectedRecipe}"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button
+					Width="100"
+                    Height="30"
+					Command="{Binding AddRecipeToMealPlan}"
+					CommandParameter="{Binding}">
+                        <TextBlock Text="Tilføj opskrift" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            -->
+            <Button
+                Width="100"
+                Height="30"
+                Margin="0,20,0,0"
+                Command="{Binding AddMealPlan}"
+                CommandParameter="{Binding}">
+                <TextBlock Text="Tilføj madplan" />
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

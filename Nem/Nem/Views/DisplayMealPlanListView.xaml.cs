@@ -1,0 +1,37 @@
+﻿using Nem.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Nem.Views
+{
+	/// <summary>
+	/// Interaction logic for DisplayMealPlanListView.xaml
+	/// </summary>
+	public partial class DisplayMealPlanListView : UserControl
+	{
+		public DisplayMealPlanListView()
+		{
+			InitializeComponent();
+		}
+
+			
+			private void Open_MealPlan(object sender, RoutedEventArgs e)
+			{
+
+			DisplayMealPlanListViewModel displayMealPlanListViewModel = DataContext as DisplayMealPlanListViewModel;
+			DisplayMealPlanViewModel displayMealPlanViewModel = new DisplayMealPlanViewModel(displayMealPlanListViewModel.SelectedMealPlan);
+			Application.Current.MainWindow.DataContext = displayMealPlanViewModel;
+		}
+			
+	}
+}

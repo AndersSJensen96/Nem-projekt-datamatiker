@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="Nem.Views.DisplayLoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nem.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Width" Value="200" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+
+
+        <StackPanel>
+
+            <!--  Username text  -->
+            <TextBlock Margin="0,200,0,0" Text="Brugernavn" />
+
+            <!--  Username textbox  -->
+            <TextBox Margin="0,5" Text="{Binding Username}" />
+
+            <!--  Password text  -->
+            <TextBlock Text="Kodeord" />
+
+            <!--  Password textbox  -->
+            <TextBox Text="{Binding Password}" />
+
+            <!--  Login button  -->
+            <Button
+                Height="50"
+                Margin="50,50,50,0"
+                Click="LoginUserView"
+                Content="Log Ind" />
+
+            <!--  Create new user button  -->
+            <Button
+                Height="50"
+                Margin="50,10,50,0"
+                Click="CreateUserView"
+                Content="Opret konto" />
+        </StackPanel>
+
+    </Grid>
+
+
+</UserControl>

@@ -1,0 +1,105 @@
+﻿<UserControl
+    x:Class="Nem.Views.AddProductView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nem.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Width" Value="200" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="AliceBlue">
+
+        <StackPanel Orientation="Vertical">
+
+            <StackPanel>
+                <Label Content="Varens navn: " />
+                <TextBox Name="ProductName" Text="{Binding Name}" />
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Beskrivelse: " />
+                <TextBox
+                    Name="ProductDescription"
+                    Height="50"
+                    Text="{Binding Description}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Varens Hovedendhed: " />
+                <!--  Changed SelectedItem to SelectedValue to return the value "gram" instead of a comboboxitem object  -->
+                <ComboBox SelectedValue="{Binding Unit}" SelectedValuePath="Content">
+                    <ComboBoxItem Content="gram" IsSelected="True" />
+                    <ComboBoxItem Content="ml" />
+                    <ComboBoxItem Content="stk" />
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <Label Content="Mængden: " />
+                <TextBox Name="ProductUnitValue" Text="{Binding UnitValue}" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Pris" />
+                <TextBox Name="ProductPrice" Text="{Binding Price}" />
+            </StackPanel>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <CheckBox
+                    Name="Organic"
+                    Grid.Column="0"
+                    Content="Økologisk"
+                    IsChecked="{Binding Organic}" />
+                <CheckBox
+                    Name="Animal"
+                    Grid.Column="1"
+                    Content="Animalsk"
+                    IsChecked="{Binding Animal}" />
+                <CheckBox
+                    Name="Meat"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Kød"
+                    IsChecked="{Binding Meat}" />
+                <CheckBox
+                    Name="Spice"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Content="Krydderi"
+                    IsChecked="{Binding Spice}" />
+            </Grid>
+
+            <StackPanel>
+                <Label Content="Hylde: " />
+                <ComboBox
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding Shelfs}"
+                    SelectedItem="{Binding ProductShelf}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,20,0,0" HorizontalAlignment="Right">
+                <Button
+                    Width="150"
+                    Height="50"
+                    Command="{Binding AddProduct}"
+                    CommandParameter="{Binding}"
+                    Content="Tilføj vare" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

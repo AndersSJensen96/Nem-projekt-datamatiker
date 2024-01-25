@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="Nem.Views.DisplayMealPlanView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nem.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Width" Value="320" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <StackPanel Background="AliceBlue">
+            <StackPanel Margin="100,30,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Title: " />
+                    <TextBlock Text="{Binding SelectedMealPlan.Title}" />
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Text="Uge: " />
+                    <TextBlock Text="{Binding SelectedMealPlan.Week}" />
+                    <TextBlock Text="         År: " />
+                    <TextBlock Text="{Binding SelectedMealPlan.Year}" />
+                </StackPanel>
+            </StackPanel>
+            <ListBox
+                Height="300"
+                ItemsSource="{Binding SelectedMealPlan.Recipes}"
+                SelectedItem="{Binding SelectedMealPlanRecipe}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="300">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding SelectedRecipe.Name}" />
+                            <Label Grid.Column="1" Content="{Binding Day}" />
+                            <Label Grid.Column="2" Content="{Binding Period.Name}" />
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button
+                Width="120"
+                Height="40"
+                Margin="0,10,0,0"
+                Background="Red"
+                Command="{Binding RemoveRecipeFromMealPlan}"
+                CommandParameter="{Binding}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fjern opskrift" />
+                    <Image Height="20" Source="\Resources\Images\trash-can_38501.png" />
+                </StackPanel>
+            </Button>
+            <Button
+                Width="200"
+                Height="40"
+                Margin="0,10,0,0"
+                Command="{Binding AddMealPlanToShoppingList}"
+                CommandParameter="{Binding}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tilføj madplan til indkøbslite" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

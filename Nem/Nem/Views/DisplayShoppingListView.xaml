@@ -1,0 +1,186 @@
+﻿<UserControl
+    x:Class="Nem.Views.DisplayShoppingListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nem.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Width" Value="440" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="Azure">
+
+
+        <StackPanel>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" />
+                <TextBlock HorizontalAlignment="Center" Text="Indkøbsliste" />
+                <ListBox
+                    Height="100"
+                    ItemsSource="{Binding ShoppingList.ShoppingListProductQuantities}"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    SelectedItem="{Binding SelectedShoppingListProductQuantity}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="430">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="0"> 
+                                <TextBlock Text="{Binding Quantity}" />
+                                    <TextBlock Text=" x " />
+                                    <TextBlock Text="{Binding SelectedProduct.Name}" />
+                                    <TextBlock Text="(" />
+                                    <TextBlock Text="{Binding SelectedProduct.UnitValue}" />
+                                    <TextBlock Text="{Binding SelectedProduct.Unit}" />
+                                    <TextBlock Text=") " />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1"> 
+                                <TextBlock Text="Total Behov: " />
+                                    <TextBlock Text="{Binding TotalProductUnitValue}" />
+                                    <TextBlock Text="{Binding SelectedProduct.Unit}" />
+                                <TextBlock Text=" " />
+                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="2"> 
+
+                                    <TextBlock FontWeight="Bold" Text=" Pris: " />
+                                    <TextBlock FontWeight="Bold" Text="{Binding SelectedProduct.Price}" />
+                                    <TextBlock FontWeight="Bold" Text="Kr" />
+                                  </StackPanel> 
+                            
+                                
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Margin="170,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Width="20"
+                            Height="20"
+                            Background="Green"
+                            Command="{Binding IncreaseProductQuantityInShoppingList}"
+                            CommandParameter="{Binding}"
+                            Content="+" />
+                        <Button
+                            Width="60"
+                            Height="20"
+                            Command="{Binding RemoveProductQuantityInShoppingList}"
+                            CommandParameter="{Binding}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Fjern" />
+                                <Image Source="\Resources\Images\trash-can_38501.png" />
+                            </StackPanel>
+                        </Button>
+                        <Button
+                            Width="20"
+                            Height="20"
+                            Background="Red"
+                            Command="{Binding DecreaseProductQuantityInShoppingList}"
+                            CommandParameter="{Binding}"
+                            Content="-" />
+                        <StackPanel Margin="70,0,0,0">
+                            <TextBlock FontWeight="Bold" Text="TotalPris: " />
+                            <TextBlock FontWeight="Bold" Text="{Binding TotalPrice}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel />
+                </StackPanel>
+
+                <StackPanel>
+
+                    <Label Margin="170,0,0,0" Content="Søg efter vare" />
+                    <StackPanel Margin="140,0,0,0" Orientation="Horizontal">
+                        <TextBox
+                            MinWidth="130"
+                            MinHeight="30"
+                            Text="{Binding SearchBoxInput}" />
+                        <Button
+                            MinWidth="30"
+                            Command="{Binding FindProductCommand}"
+                            CommandParameter="{Binding}"
+                            Content="Søg" />
+                    </StackPanel>
+
+
+                    <StackPanel>
+                        <ListBox
+                            Height="100"
+                            ItemsSource="{Binding FoundProducts}"
+                            SelectedItem="{Binding SelectedProduct}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Varenavn" />
+                                        <TextBlock Text="{Binding Name}" />
+                                        <Label Content="Mængde" />
+                                        <TextBlock Text="{Binding UnitValue}" />
+                                        <TextBlock Text="{Binding Unit}" />
+                                        <CheckBox
+                                            Content="Økologisk"
+                                            IsChecked="{Binding Organic}"
+                                            IsEnabled="False" />
+                                        <CheckBox
+                                            Content="Animalsk"
+                                            IsChecked="{Binding Animal}"
+                                            IsEnabled="False" />
+                                        <CheckBox
+                                            Content="Kød"
+                                            IsChecked="{Binding Meat}"
+                                            IsEnabled="False" />
+                                        <CheckBox
+                                            Content="Krydderi"
+                                            IsChecked="{Binding Spice}"
+                                            IsEnabled="False" />
+                                        <Label Content="Hylde: " />
+                                        <TextBlock Text="{Binding ProductShelf.Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button
+                            Width="60"
+                            Command="{Binding AddProductToShoppingList}"
+                            CommandParameter="{Binding}"
+                            Content="Tilføg Vare til indkøbsliste" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+
+
+                    <StackPanel Margin="10,0,0,0">
+                        <Label Margin="160,10,0,0" Content="Indkøbsliste navn: " />
+
+                        <TextBox
+                            Width="130"
+                            MinHeight="30"
+                            Text="{Binding ShoppingList.Name}" />
+                        <Button
+                            Width="120"
+                            Command="{Binding SaveShoppingList}"
+                            CommandParameter="{Binding}"
+                            Content="Gem indkøbsliste" />
+
+
+
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

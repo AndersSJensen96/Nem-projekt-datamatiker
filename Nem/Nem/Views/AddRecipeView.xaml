@@ -1,0 +1,215 @@
+﻿<UserControl
+    x:Class="Nem.Views.AddRecipeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nem.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="HalfWidth" TargetType="StackPanel">
+            <Setter Property="Width" Value="250" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Width="300" Background="White">
+
+        <StackPanel>
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Vertical"
+                Style="{StaticResource HalfWidth}">
+                <TextBlock Text="Navn:" Margin="50,0,0,0"/>
+                <TextBox Width="150" Text="{Binding Name}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Style="{StaticResource HalfWidth}" >
+                <TextBlock Text="Beskrivelse: " Margin="50,10,0,0"/>
+                <TextBox Width="150" Text="{Binding Description}" Margin="10" Height="70"/>
+            </StackPanel>
+
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Style="{StaticResource HalfWidth}">
+                <TextBlock Text="Sværhedsgrad:   " Margin="50,0,0,0"/>
+                <TextBox MinWidth="30" Text="{Binding Difficulty}" />
+            </StackPanel>
+
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Style="{StaticResource HalfWidth}">
+                <TextBlock Text="Tilberedelsestid: " Margin="50,0,0,0"/>
+                <TextBox MinWidth="30" Text="{Binding CookingTime}" />
+            </StackPanel>
+
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Style="{StaticResource HalfWidth}">
+                <TextBlock Text="Antal personer:  " Margin="50,0,0,0"/>
+                <TextBox MinWidth="30" Text="{Binding NumberOfPersons}" />
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Vælg Mad kategorier" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ListBox
+                    Width="150"
+                    ItemsSource="{Binding FoodCategories}"
+                    SelectedItem="{Binding SelectedFoodCategory}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox
+                    Width="150"
+                    ItemsSource="{Binding ChosenFoodCategories}"
+                    SelectedItem="{Binding SelectedFoodCategory}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </StackPanel>
+            <StackPanel
+                Height="30"
+                Margin="30,0,0,0"
+                Orientation="Horizontal">
+
+                <Button
+                    Width="120"
+                    Background="Green"
+                    Command="{Binding AddFoodCategory}"
+                    CommandParameter="{Binding}"
+                    Content="Tilføj" />
+                <Button
+                    Width="120"
+                    Background="Red"
+                    Command="{Binding RemoveFoodCategory}"
+                    CommandParameter="{Binding}"
+                    Content="Remove" />
+            </StackPanel>
+
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="MåltidsGruppe" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ListBox
+                    Width="150"
+                    ItemsSource="{Binding Mealtimes}"
+                    SelectedItem="{Binding SelectedMealtime}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox
+                    Width="150"
+                    ItemsSource="{Binding ChosenMealtimes}"
+                    SelectedItem="{Binding SelectedMealtime}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel
+                Height="30"
+                Margin="30,0,0,0"
+                Orientation="Horizontal">
+                <Button
+                    Width="120"
+                    Background="Green"
+                    Command="{Binding AddMealtime}"
+                    CommandParameter="{Binding}"
+                    Content="Tilføj" />
+                <Button
+                    Width="120"
+                    Background="Red"
+                    Command="{Binding RemoveMealtime}"
+                    CommandParameter="{Binding}"
+                    Content="Remove" />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Vare" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ListBox
+                    Width="150"
+                    Height="90"
+                    ItemsSource="{Binding Products}"
+                    SelectedItem="{Binding SelectedProduct}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox
+                    Width="150"
+                    Height="90"
+                    ItemsSource="{Binding ChosenProductQuantitys}"
+                    SelectedItem="{Binding SelectedProductQuantity}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding SelectedProduct.Name}" />
+                                <TextBlock Text="{Binding UserUnitValue}" />
+                                <TextBlock Text="{Binding UserUnit}" />
+                                <TextBlock Text="{Binding ProductUnitValue}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Mægnde" />
+                <TextBox MinWidth="50" Text="{Binding ProductQuantity_UserUnitValue}" />
+
+                <Label Content="Type" />
+                <TextBox MinWidth="30" Text="{Binding ProductQuantity_UserUnit}" />
+
+                <Label Content="Productmænde" />
+                <TextBox MinWidth="30" Text="{Binding ProductQuantity_ProductUnitValue}" />
+            </StackPanel>
+
+
+
+            <StackPanel
+                Height="30"
+                Margin="30,0,0,0"
+                Orientation="Horizontal">
+                <Button
+                    Width="120"
+                    Background="Green"
+                    Command="{Binding AddProduct}"
+                    CommandParameter="{Binding}"
+                    Content="Tilføj" />
+                <Button
+                    Width="120"
+                    Background="Red"
+                    Command="{Binding RemoveProduct}"
+                    CommandParameter="{Binding}"
+                    Content="Remove" />
+            </StackPanel>
+
+            <Button
+                Margin="0,20"
+                Command="{Binding AddRecipe}"
+                CommandParameter="{Binding}"
+                Content="Tilføj Opskrift" />
+        </StackPanel>
+    </Grid>
+</UserControl>
